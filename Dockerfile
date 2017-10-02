@@ -91,3 +91,5 @@ RUN apt-get clean && \
 ENV TERM dumb
 ENV JAVA_OPTS "-Xms512m -Xmx1024m"
 ENV GRADLE_OPTS "-XX:+UseG1GC -XX:MaxGCPauseMillis=1000"
+
+RUN echo "Installed."
