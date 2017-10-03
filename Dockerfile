@@ -11,19 +11,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV ANDROID_CMD_TOOLS_VERSION 3859397
 ENV ANDROID_CMD_TOOLS_URL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_CMD_TOOLS_VERSION}.zip
 
-# ALT 2 : SDK Tools (android update)
-# ENV ANDROID_SDK_VERSION 25.2.3
-# ENV ANDROID_SDK_URL https://dl.google.com/android/repository/tools_r${ANDROID_SDK_VERSION}-linux.zip
-
 ENV ANDROID_API_VERSION 25
 ENV ANDROID_BUILD_TOOLS_VERSION 25.0.3
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
-
-# Alt 1 ENV ANDROID_COMPONENTS
-ENV ANDROID_COMPONENTS="platforms;android-26${ANDROID_API_VERSION} build-tools;${ANDROID_BUILD_TOOLS_VERSION} "
-ENV GOOGLE_COMPONENTS="extras;android;m2repository extras;google;m2repository extras;google;google_play_services"
 
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
