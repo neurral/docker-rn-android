@@ -27,7 +27,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip wget --no-install-recommends && \
     apt-get clean
  
-# Alt 1 : SDK Tools from https://developer.android.com/studio/index.html
+# SDK Tools from https://developer.android.com/studio/index.html
 RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate && \
     mkdir -p $ANDROID_HOME && \
     unzip -q sdk-tools.zip && \
