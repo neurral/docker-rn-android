@@ -4,6 +4,7 @@ MAINTAINER Lee Alexis
 
 # PARAMETERS
 ##############################################################################
+
 # Noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -21,6 +22,7 @@ ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # DOWNLOAD REQUESTS
 ##############################################################################
+
 # Install dependencies
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
@@ -36,6 +38,7 @@ RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate 
 
 # INSTALLATIONS
 #############################################################################
+
 # Confirms that we agreed on the Terms and Conditions of the SDK itself
 # (if we didn’t the build would fail, asking us to agree on those terms).
 RUN mkdir -p "${ANDROID_HOME}/licenses" || true && \
@@ -60,10 +63,10 @@ RUN echo "Update Android SDK" && \
 
 # POST-INSTALLATION
 ##############################################################################
+
 # Cleanup
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/tmp* /tmp/*
-
 
 # Support Gradle
 ENV TERM dumb
