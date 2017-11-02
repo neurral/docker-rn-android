@@ -41,9 +41,20 @@ RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate 
 
 # Confirms that we agreed on the Terms and Conditions of the SDK itself
 # (if we didn’t the build would fail, asking us to agree on those terms).
+# Updated Hash for android-sdk-license
 RUN mkdir -p "${ANDROID_HOME}/licenses" || true && \
-    echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license" && \
-    echo "84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+    echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license" && \
+    echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "${ANDROID_HOME}/licenses/android-sdk-license" && \
+    echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+
+#TODO set license hash for the following    
+#android-googletv-license
+#mips-android-sysimage-license
+#google-gdk-license
+
+
+RUN echo "Terms and Conditions" && \
+    echo y | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
 # Install Android SDK components following our version
 RUN echo "Update Android SDK" && \
@@ -57,9 +68,8 @@ RUN echo "Update Android SDK" && \
     echo "Install google-m2repository" && \
     echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;m2repository" && \
     echo "Install google_play_services" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services" && \
-    echo "Terms and Conditions" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+    echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services"
+    
 
 # POST-INSTALLATION
 ##############################################################################
