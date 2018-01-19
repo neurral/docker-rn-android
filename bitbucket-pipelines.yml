@@ -4,5 +4,23 @@ options:
 pipelines:
   default:
     - step:
+        name: Docker Build Snapshot
         script:
-          - docker build . -t la1255/bitbucket-android-build
+          - docker build . -t la1255/bitbucket-android-build:snapshot
+    - step:
+        name: Docker Push Snapshot
+        script:
+          - docker push la1255/bitbucket-android-build:snapshot
+
+  # Pipelines that are triggered manually
+  custom:
+    android-build-latest: # This step will build and push a new la1255/bitbucket-android-build:latest image
+      - step:
+          name: Docker Build :latest
+          script:
+            - docker build . -t la1255/bitbucket-android-build:latest
+    deploy-to-hub: # BE CAREFUL: the "latest" tag is already deployed and may result in errors in that pipeline if incorrectly built.
+      - step:
+          name: Docker Push :latest
+          script:
+            - docker push la1255/bitbucket-android-build:latest
