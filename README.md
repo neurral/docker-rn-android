@@ -29,12 +29,12 @@ If you follow the branch name convention and pushed to `origin`, Bitbucket will 
 
 1. In the Dockerfile, modify the variables with your version numbers:
 Find the following lines and update accordingly.
-      ```
-      ...
-      ENV ANDROID_API_VERSION 27
-      ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
-      ...
-      ```
+```
+    ...
+    ENV ANDROID_API_VERSION 27
+    ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
+    ...
+```
 2. Just `git commit` and `git push` to `origin` with your branch name. Dockerhub will automatically build the container (see registry below).
 
 ##### Custom
