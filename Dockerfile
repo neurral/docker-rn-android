@@ -8,12 +8,13 @@ MAINTAINER Lee Alexis
 # Noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
-# ALT 1 : Version refers to commandline tools (sdkmanager)
+# Version refers to commandline tools (sdkmanager)
 ENV ANDROID_CMD_TOOLS_VERSION 3859397
 ENV ANDROID_CMD_TOOLS_URL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_CMD_TOOLS_VERSION}.zip
 
-ENV ANDROID_API_VERSION 25
-ENV ANDROID_BUILD_TOOLS_VERSION 25.0.3
+# Android SDk version: UPDATE HERE
+ENV ANDROID_API_VERSION 27
+ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
@@ -83,4 +84,5 @@ ENV TERM dumb
 ENV JAVA_OPTS "-Xms512m -Xmx1024m"
 ENV GRADLE_OPTS "-XX:+UseG1GC -XX:MaxGCPauseMillis=1000"
 
-RUN echo "Installed."
+#end message
+RUN echo "Installed ${ANDROID_API_VERSION}."
