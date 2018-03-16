@@ -3,7 +3,7 @@ FROM openjdk:8
 MAINTAINER Lee Alexis
 
 # PARAMETERS
-##############################################################################
+###############################################################################
 
 # Noninteractive
 ENV DEBIAN_FRONTEND noninteractive
@@ -21,7 +21,7 @@ ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # DOWNLOAD REQUESTS
-##############################################################################
+###############################################################################
 
 # Install dependencies
 RUN dpkg --add-architecture i386 && \
@@ -37,7 +37,7 @@ RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate 
     rm -f sdk-tools.zip
 
 # INSTALLATIONS
-#############################################################################
+##############################################################################
 
 # Confirms that we agreed on the Terms and Conditions of the SDK itself
 # (if we didn’t the build would fail, asking us to agree on those terms).
