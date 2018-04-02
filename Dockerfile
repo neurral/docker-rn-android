@@ -19,7 +19,7 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 
-ENV PATH $ANDROID_HOME/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+ENV PATH ${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
 # DOWNLOAD REQUESTS
 ###############################################################################
@@ -56,18 +56,18 @@ RUN echo "Terms and Conditions" && \
     echo y | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
 # Install Android SDK components following our version
-RUN echo "Install android-ANDROID_API_VERSION" && \
-    echo y | sdkmanager "platform-tools" "platforms;android-${ANDROID_API_VERSION}" && \
+RUN echo "Update Android SDK" && \
+    echo y | sdkmanager --update --verbose && \
+    echo "Install android-ANDROID_API_VERSION" && \
+    echo y | sdkmanager "platform-tools" "platforms;android-${ANDROID_API_VERSION}" --verbose && \
     echo "Install build-tools-${ANDROID_BUILD_TOOLS_VERSION}" && \
-    echo y | sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
+    echo y | sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --verbose && \
     echo "Install android-m2repository" && \
-    echo y | sdkmanager "extras;android;m2repository" && \
+    echo y | sdkmanager "extras;android;m2repository" --verbose && \
     echo "Install google-m2repository" && \
-    echo y | sdkmanager "extras;google;m2repository" && \
+    echo y | sdkmanager "extras;google;m2repository" --verbose && \
     echo "Install google_play_services" && \
-    echo y | sdkmanager "extras;google;google_play_services" && \
-    echo "Update Android SDK" && \
-    echo y | sdkmanager --update
+    echo y | sdkmanager "extras;google;google_play_services" --verbose
 
 # POST-INSTALLATION
 ##############################################################################
