@@ -56,9 +56,7 @@ RUN echo "Terms and Conditions" && \
     echo y | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
 # Install Android SDK components following our version
-RUN echo "Update Android SDK" && \
-    echo y | sdkmanager --update && \
-    echo "Install android-ANDROID_API_VERSION" && \
+RUN echo "Install android-ANDROID_API_VERSION" && \
     echo y | sdkmanager "platform-tools" "platforms;android-${ANDROID_API_VERSION}" && \
     echo "Install build-tools-${ANDROID_BUILD_TOOLS_VERSION}" && \
     echo y | sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
@@ -68,7 +66,7 @@ RUN echo "Update Android SDK" && \
     echo y | sdkmanager "extras;google;m2repository" && \
     echo "Install google_play_services" && \
     echo y | sdkmanager "extras;google;google_play_services" && \
-    echo "Update all SDK" && \
+    echo "Update Android SDK" && \
     echo y | sdkmanager --update
 
 # POST-INSTALLATION
