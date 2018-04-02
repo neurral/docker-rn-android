@@ -19,7 +19,7 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 
-ENV PATH ${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+ENV PATH $ANDROID_HOME/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
 # DOWNLOAD REQUESTS
 ###############################################################################
