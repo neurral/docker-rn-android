@@ -17,8 +17,9 @@ ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 
-ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
+ENV PATH $ANDROID_HOME/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
 # DOWNLOAD REQUESTS
 ###############################################################################
@@ -28,7 +29,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip wget --no-install-recommends && \
     apt-get clean
- 
+
 # SDK Tools from https://developer.android.com/studio/index.html
 RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate && \
     mkdir -p $ANDROID_HOME && \
@@ -47,7 +48,7 @@ RUN mkdir -p "${ANDROID_HOME}/licenses" || true && \
     echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "${ANDROID_HOME}/licenses/android-sdk-license" && \
     echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
 
-#TODO set license hash for the following    
+#TODO set license hash for the following
 #android-googletv-license
 #mips-android-sysimage-license
 #google-gdk-license
@@ -58,18 +59,19 @@ RUN echo "Terms and Conditions" && \
 
 # Install Android SDK components following our version
 RUN echo "Update Android SDK" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager --update && \
+    echo y | sdkmanager --update && \
     echo "Install android-ANDROID_API_VERSION" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-${ANDROID_API_VERSION}" && \
+    echo y | sdkmanager "platform-tools" "platforms;android-${ANDROID_API_VERSION}" && \
     echo "Install build-tools-${ANDROID_BUILD_TOOLS_VERSION}" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
+    echo y | sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" && \
     echo "Install android-m2repository" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;android;m2repository" && \
+    echo y | sdkmanager "extras;android;m2repository" && \
     echo "Install google-m2repository" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;m2repository" && \
+    echo y | sdkmanager "extras;google;m2repository" && \
     echo "Install google_play_services" && \
-    echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services"
-    
+    echo y | sdkmanager "extras;google;google_play_services" && \
+    echo "Update all SDK" && \
+    echo y | sdkmanager --update
 
 # POST-INSTALLATION
 ##############################################################################
