@@ -7,7 +7,7 @@
 
 ### Published as:
 ##### Image Names:
-* **master:** `ultrarangers/android-build:latest`
+* **master:** `ultrarangers/android-build:latest` (CI CURRENTLY DISABLED)
 * **android-*:** `ultrarangers/android-build:sdk-*`
 
 
@@ -41,7 +41,7 @@ Find the following lines and update accordingly.
 * For custom tags, you need to manually build. Use `docker build` and `docker push` like:
 
       docker build . -t ultrarangers/android-build:[your tag]
-      docker push ultrarangers/android-build::[your tag]
+      docker push ultrarangers/android-build:[your tag]
 
 
 
