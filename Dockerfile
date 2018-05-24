@@ -17,7 +17,7 @@ ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
-ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
+ENV ANDROID_NDK_HOME ${ANDROID_SDK}/ndk-bundle
 
 ENV PATH $ANDROID_HOME/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
