@@ -27,7 +27,7 @@ ENV PATH $ANDROID_HOME/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:
 # Install dependencies
 RUN dpkg --add-architecture i386 && \
   apt-get update && \
-  apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip wget build-essential --no-install-recommends && \
+  apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip wget build-essential rsync --no-install-recommends && \
   apt-get clean
 
 # SDK Tools from https://developer.android.com/studio/index.html
