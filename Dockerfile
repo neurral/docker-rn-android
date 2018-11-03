@@ -17,6 +17,9 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
+ENV NODE_VERSION 8.10
+ENV NVM_VERSION 0.33.11 # see https://github.com/creationix/nvm
+
 # DOWNLOAD REQUESTS
 ##############################################################################
 
@@ -67,6 +70,17 @@ RUN echo "Update Android SDK" && \
     echo "Install google_play_services" && \
     echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;google_play_services"
     
+    
+# Install NVM to install NODE, then react-native-cli
+RUN echo "Download Node version manager" && \
+    (curl -o- https://raw.githubusercontent.com/creationix/nvm/v${NVM_VERSION}/install.sh | bash) && \
+    command -v nvm && \
+    echo "Install Node" && \
+    nvm install $NODE_VERSION && nvm use $NODE_VERSION && \
+    node -v && npm -v && \
+    echo "Install React-Native CLI" && \
+    npm i -g react-native-cli
+
 
 # POST-INSTALLATION
 ##############################################################################
@@ -81,3 +95,7 @@ ENV JAVA_OPTS "-Xms512m -Xmx1024m"
 ENV GRADLE_OPTS "-XX:+UseG1GC -XX:MaxGCPauseMillis=1000"
 
 RUN echo "Installed."
+
+# TODOs
+# in your pipelines or CI, do normal npm install, react-native build trigger, then, cd to /android and run gradle for the builds
+# See your gradle scripts for the script name (somthing like app:assembleDebug or similar)
