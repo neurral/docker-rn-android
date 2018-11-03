@@ -27,7 +27,7 @@ ENV NVM_VERSION 0.33.11 # see https://github.com/creationix/nvm
 # Install dependencies
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip wget --no-install-recommends && \
+    apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 unzip curl wget --no-install-recommends && \
     apt-get clean
  
 # SDK Tools from https://developer.android.com/studio/index.html
