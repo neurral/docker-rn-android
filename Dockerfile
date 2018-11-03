@@ -96,6 +96,6 @@ ENV GRADLE_OPTS "-XX:+UseG1GC -XX:MaxGCPauseMillis=1000"
 
 RUN echo "Installed."
 
-# TODOs
+# TODOs:
 # in your pipelines or CI, do normal npm install, react-native build trigger, then, cd to /android and run gradle for the builds
 # See your gradle scripts for the script name (somthing like app:assembleDebug or similar)
