@@ -72,10 +72,12 @@ RUN echo "Update Android SDK" && \
   echo y | sdkmanager "extras;google;m2repository" --verbose && \
   echo "Install google_play_services" && \
   echo y | sdkmanager "extras;google;google_play_services" --verbose && \
+  echo "Install NDK with CMake, LLDB" && \
+  echo y | sdkmanager "ndk-bundle" "lldb;3.1" "cmake;3.6.4111459" --verbose && \
   echo "Install emulator" && \
   echo y | sdkmanager "platform-tools" "emulator" "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a" --verbose && \
-  echo "Install NDK with CMake, LLDB" && \
-  echo y | sdkmanager "ndk-bundle" "lldb;3.1" "cmake;3.6.4111459" --verbose
+  echo "Create AVD" && \
+  echo no | avdmanager create avd -n test -k "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a"
 
 
 # POST-INSTALLATION
