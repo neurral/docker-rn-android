@@ -7,12 +7,14 @@
 
 ### Published as:
 ##### Image Names:
-* **master:** `ultrarangers/android-build:latest` (CI CURRENTLY DISABLED)
+* **master:** `ultrarangers/android-build:latest` (CI CURRENTLY DISABLED, usa tags by version)
 * **android-*:** `ultrarangers/android-build:sdk-*`
+
 
 
 ##### Container Registry:
 If you follow the branch name convention and pushed to `origin`, Bitbucket will integrate automatically to:
+
       https://hub.docker.com/r/ultrarangers/android-build/
       https://hub.docker.com/r/ultrarangers/android-build/tags/
 
