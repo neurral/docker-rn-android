@@ -1,7 +1,7 @@
 FROM openjdk:8
 MAINTAINER Lee Alexis
 
-# Android 8 - "Oreo"
+# Android 10 - "Queen Cake"
 
 # PARAMETERS
 ###############################################################################
@@ -13,8 +13,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV ANDROID_CMD_TOOLS_VERSION 3859397
 ENV ANDROID_CMD_TOOLS_URL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_CMD_TOOLS_VERSION}.zip
 
-ENV ANDROID_API_VERSION 26
-ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
+ENV ANDROID_API_VERSION 28
+ENV ANDROID_BUILD_TOOLS_VERSION 28.0.3
 ENV EMULATOR_VERSION 24
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux

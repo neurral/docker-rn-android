@@ -1,37 +1,43 @@
-### What is this repository for?
+# What is this repository for?
 
 - Dockerfile for generating a Docker container for building a specific Android SDK.
 
-### Published as:
+# Published as:
 
-##### Image Names:
+#### Image Names:
 
-- **master:** `ultrarangers/android-build:latest` (CI CURRENTLY DISABLED, usa tags by version)
-- **android-\*:** `ultrarangers/android-build:sdk-*`
+- **master:**
+  `ultrarangers/android-build:latest`
+- **android-API_NUMBER:** `ultrarangers/android-build:sdk-*`
 
-##### Container Registry:
+#### Container Registry:
 
 If you follow the branch name convention and pushed to `origin`, Bitbucket will integrate automatically to:
 
       https://hub.docker.com/r/ultrarangers/android-build/
       https://hub.docker.com/r/ultrarangers/android-build/tags/
 
-### Building
+# Building
 
-##### Automated build
+#### Automated build
 
-- To create a Docker container for a specific Android API version, branch out from master or the latest branch using the naming convention
+To create a Docker container for a specific Android API version, branch out from master or the latest branch using the naming convention
 
-        android-{API VERSION NUMBER}
+```
+   # android-{API VERSION NUMBER}
+   $ git branch android-27
+```
 
-  e.g.
+The image tag name will be based on this later in the DockerHub automated build.
 
-        android-27
+1. Create your folder:
 
-  The image tag name will be based on this later in the DockerHub automated build.
+```
+  $ mkdir android-27
+  $ cd android-27
+```
 
-1. In the Dockerfile, modify the variables with your version numbers:
-   Find the following lines and update accordingly.
+2. Copy the other Dockerfile in the last version. In the Dockerfile, modify the variables with your version numbers: find the following lines and update accordingly.
 
 ```
     ...
@@ -40,17 +46,27 @@ If you follow the branch name convention and pushed to `origin`, Bitbucket will 
     ...
 ```
 
-2. Just `git commit` and `git push` to `origin` with your branch name. Dockerhub will automatically build the container (see registry below).
+3. Just `git commit` and `git push` to `origin` with your branch name. Dockerhub will automatically build the container (see registry below).
 
-##### Custom
+4. in _master_, the git tag ANDROID_VERSION-SEQUENCE_NUMBER will be applied. This build will also overwrite the existing sdk-ANDROID_VERSION tag.
+
+```
+$ git tag 27-0
+```
+
+#### Custom tags
 
 - For custom tags, you need to manually build. Use `docker build` and `docker push` like:
 
-      docker build . -t ultrarangers/android-build:[your tag]
-      docker push ultrarangers/android-build:[your tag]
+```
+  $ docker build . -t ultrarangers/android-build:[your tag]
+  $ docker push ultrarangers/android-build:[your tag]
+```
 
-#### Usage
+# Usage
 
 - To use your containers, in your CI file (e.g. bitbucket-pipelines.yml), just specify the image using the tag name. e.g.:
 
-      image:ultrarangers/android-build:sdk-27
+```
+  image:ultrarangers/android-build:sdk-27
+```
