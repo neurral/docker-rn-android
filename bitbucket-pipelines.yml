@@ -2,19 +2,27 @@ options:
   docker: true
 
 pipelines:
-  default:
-    - step:
-        name: Docker Build Snapshot
-        script:
-          - docker build . -t la1255/bitbucket-android-build:snapshot
-          - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-          - docker push la1255/bitbucket-android-build:snapshot
+  branches:
+    # master:
+    #   - step:
+    #       name: Docker Build Snapshot
+    #       script:
+    #         - docker build . -t ultrarangers/android-build:snapshot
+    #         - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    #         - docker push ultrarangers/android-build:snapshot
+    android-*:
+      - step:
+          script:
+            - export API_NUMBER=$(echo $BITBUCKET_BRANCH| cut -d'_' -f 2)
+            - docker build . -t ultrarangers/android-build:sdk-${API_NUMBER:-latest}
+            - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            - docker push ultrarangers/android-build:sdk-${API_NUMBER:-latest}
 
   # Pipelines that are triggered manually
   custom:
     android-build-latest:
-    # This step will build and push a new la1255/bitbucket-android-build:latest image
-    # BE CAREFUL: the "latest" tag is already deployed and may result in errors in that pipeline if incorrectly built.
+      # This step will build and push a new la1255/bitbucket-android-build:latest image
+      # BE CAREFUL: the "latest" tag is already deployed and may result in errors in that pipeline if incorrectly built.
       - step:
           name: Docker Build :latest
           script:
