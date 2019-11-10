@@ -1,6 +1,7 @@
 FROM openjdk:8
-
 MAINTAINER Lee Alexis
+
+# Android 10 - "Queen Cake"
 
 # PARAMETERS
 ###############################################################################
@@ -9,11 +10,12 @@ MAINTAINER Lee Alexis
 ENV DEBIAN_FRONTEND noninteractive
 
 # ALT 1 : Version refers to commandline tools (sdkmanager)
-ENV ANDROID_CMD_TOOLS_VERSION 3859397
+ENV ANDROID_CMD_TOOLS_VERSION 4333796
 ENV ANDROID_CMD_TOOLS_URL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_CMD_TOOLS_VERSION}.zip
 
-ENV ANDROID_API_VERSION 27
-ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
+ENV ANDROID_API_VERSION 29
+ENV ANDROID_BUILD_TOOLS_VERSION 29.0.0
+ENV EMULATOR_VERSION 24
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
@@ -36,6 +38,11 @@ RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate 
   unzip -q sdk-tools.zip && \
   mv tools $ANDROID_HOME && \
   rm -f sdk-tools.zip
+  
+
+# Wait Script for Emulator http://rkistner.github.io/android/2013/02/05/android-builds-on-travis-ci/
+RUN wget -q -O android-wait-for-emulator https://raw.githubusercontent.com/travis-ci/travis-cookbooks/0f497eb71291b52a703143c5cd63a217c8766dc9/community-cookbooks/android-sdk/files/default/android-wait-for-emulator && \
+  chmod +x android-wait-for-emulator
 
 # INSTALLATIONS
 ##############################################################################
@@ -68,7 +75,11 @@ RUN echo "Update Android SDK" && \
   echo "Install google_play_services" && \
   echo y | sdkmanager "extras;google;google_play_services" --verbose && \
   echo "Install NDK with CMake, LLDB" && \
-  echo y | sdkmanager "ndk-bundle" "lldb;3.1" "cmake;3.6.4111459"
+  echo y | sdkmanager "ndk-bundle" "lldb;3.1" "cmake;3.6.4111459" --verbose && \
+  echo "Install emulator" && \
+  echo y | sdkmanager "platform-tools" "emulator" "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a" --verbose && \
+  echo "Create AVD" && \
+  echo no | avdmanager create avd -n test -k "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a"
 
 
 # POST-INSTALLATION
