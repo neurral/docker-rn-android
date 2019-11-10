@@ -1,6 +1,7 @@
 FROM openjdk:8
-
 MAINTAINER Lee Alexis
+
+# Android 10 - "Queen Cake"
 
 # PARAMETERS
 ###############################################################################
@@ -9,11 +10,11 @@ MAINTAINER Lee Alexis
 ENV DEBIAN_FRONTEND noninteractive
 
 # ALT 1 : Version refers to commandline tools (sdkmanager)
-ENV ANDROID_CMD_TOOLS_VERSION 3859397
+ENV ANDROID_CMD_TOOLS_VERSION 4333796
 ENV ANDROID_CMD_TOOLS_URL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_CMD_TOOLS_VERSION}.zip
 
-ENV ANDROID_API_VERSION 28
-ENV ANDROID_BUILD_TOOLS_VERSION 28.0.3
+ENV ANDROID_API_VERSION 29
+ENV ANDROID_BUILD_TOOLS_VERSION 29.0.0
 ENV EMULATOR_VERSION 24
 
 ENV ANDROID_HOME /usr/local/android-sdk-linux
