@@ -38,6 +38,7 @@ RUN wget -q -O sdk-tools.zip "${ANDROID_CMD_TOOLS_URL}"  --no-check-certificate 
   unzip -q sdk-tools.zip && \
   mv tools $ANDROID_HOME && \
   rm -f sdk-tools.zip
+  
 
 # Wait Script for Emulator http://rkistner.github.io/android/2013/02/05/android-builds-on-travis-ci/
 RUN wget -q -O android-wait-for-emulator https://raw.githubusercontent.com/travis-ci/travis-cookbooks/0f497eb71291b52a703143c5cd63a217c8766dc9/community-cookbooks/android-sdk/files/default/android-wait-for-emulator && \
